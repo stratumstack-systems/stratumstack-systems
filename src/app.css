@@ -1,0 +1,165 @@
+@import 'tailwindcss';
+
+/*
+ * Design tokens ported from the Stitch "Sapphire & Cobalt" design.
+ * Every `--color-*` becomes a Tailwind utility:
+ * `--color-surface-card` -> `bg-surface-card`, `text-surface-card`, etc.
+ */
+@theme {
+	--color-surface: #10131d;
+	--color-surface-lowest: #0b0e18;
+	--color-surface-low: #181b26;
+	--color-surface-card: #1c1f2a;
+	--color-surface-high: #272a34;
+	--color-surface-bright: #363944;
+
+	--color-primary: #b4c5ff;
+	--color-primary-container: #2563eb;
+	--color-secondary: #38bdf8;
+	--color-secondary-soft: #7bd0ff;
+
+	--color-on-surface: #e0e2f0;
+	--color-on-surface-variant: #c3c6d7;
+	--color-outline-subtle: #434655;
+
+	--font-display: 'Space Grotesk', system-ui, sans-serif;
+	--font-mono: 'JetBrains Mono', ui-monospace, monospace;
+	--font-editorial: 'Newsreader', Georgia, serif;
+	--font-sans: 'Inter', system-ui, sans-serif;
+}
+
+@layer base {
+	html {
+		scroll-behavior: smooth;
+		/* Offset anchor jumps so the fixed header never covers a heading. */
+		scroll-padding-top: 5rem;
+	}
+
+	body {
+		margin: 0;
+		overscroll-behavior-y: none;
+		background-color: var(--color-surface);
+		color: var(--color-on-surface);
+		font-family: var(--font-sans);
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		html {
+			scroll-behavior: auto;
+		}
+	}
+}
+
+/*
+ * Acrylic reflection: a soft radial highlight that follows the pointer.
+ * The `use:spotlight` action writes --mouse-x / --mouse-y; with no pointer
+ * (or no JS) the defaults park the gradient far off-card, so it stays hidden.
+ */
+.spotlight-card {
+	position: relative;
+	overflow: hidden;
+	transition:
+		transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+		border-color 0.3s ease,
+		box-shadow 0.3s ease;
+}
+
+.spotlight-card:hover {
+	transform: translateY(-3px);
+}
+
+.spotlight-card::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	border-radius: inherit;
+	background: radial-gradient(
+		600px circle at var(--mouse-x, -500px) var(--mouse-y, -500px),
+		rgba(56, 189, 248, 0.12),
+		transparent 40%
+	);
+	pointer-events: none;
+	z-index: 1;
+	opacity: 0;
+	transition: opacity 0.4s ease;
+}
+
+.spotlight-card:hover::before {
+	opacity: 1;
+}
+
+/* Underline that glides out from the left on hover. */
+.glide-link {
+	position: relative;
+	display: inline-block;
+}
+
+.glide-link::after {
+	content: '';
+	position: absolute;
+	bottom: -3px;
+	left: 0;
+	width: 0%;
+	height: 2px;
+	background: linear-gradient(90deg, #38bdf8, #2563eb, #b4c5ff);
+	transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glide-link:hover::after {
+	width: 100%;
+}
+
+/* Accent rule that fills across a card's bottom edge on hover. */
+.card-line {
+	position: relative;
+}
+
+.card-line::after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 0%;
+	height: 2px;
+	background: linear-gradient(90deg, #38bdf8, #2563eb);
+	transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-line:hover::after {
+	width: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.spotlight-card,
+	.spotlight-card::before,
+	.glide-link::after,
+	.card-line::after {
+		transition: none !important;
+	}
+
+	.spotlight-card:hover {
+		transform: none;
+	}
+}
+
+/* Material Symbols ligature font, loaded from Google Fonts in app.html. */
+.material-symbols-outlined {
+	font-family: 'Material Symbols Outlined';
+	font-weight: normal;
+	font-style: normal;
+	line-height: 1;
+	letter-spacing: normal;
+	text-transform: none;
+	display: inline-block;
+	white-space: nowrap;
+	word-wrap: normal;
+	direction: ltr;
+	font-variation-settings:
+		'FILL' 0,
+		'wght' 400,
+		'GRAD' 0,
+		'opsz' 24;
+	-webkit-font-feature-settings: 'liga';
+	-webkit-font-smoothing: antialiased;
+	user-select: none;
+}
