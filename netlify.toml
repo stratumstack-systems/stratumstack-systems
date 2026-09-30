@@ -1,0 +1,12 @@
+# Netlify builds the site itself from this repo (separately from the GitHub Pages
+# workflow). Without these settings it published the raw repository root, so the
+# live URL had no index.html and returned 404.
+[build]
+  command = "npm run build"
+  publish = "build"
+
+[build.environment]
+  # Match the GitHub Actions workflow.
+  NODE_VERSION = "24"
+  # Netlify serves the site from the domain root, so no /<repo> prefix.
+  BASE_PATH = ""
