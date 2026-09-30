@@ -3,6 +3,11 @@ import { sveltekit } from '@sveltejs/kit/vite';
 import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'vite';
 
+// GitHub Pages serves a project site from /<repo>; the deploy workflow passes that
+// prefix in as BASE_PATH (empty for a user site, a custom domain, or local dev).
+// `base` is typed as '' | `/${string}`, which a plain env lookup can't prove.
+const base = (process.env.BASE_PATH ?? '') as '' | `/${string}`;
+
 export default defineConfig({
 	plugins: [
 		tailwindcss(),
@@ -16,11 +21,7 @@ export default defineConfig({
 			// Marketing site: fully prerendered to static HTML.
 			adapter: adapter({ fallback: undefined }),
 
-			// GitHub Pages serves a project site from /<repo>; the deploy workflow
-			// passes that prefix in as BASE_PATH (empty for a custom domain).
-			paths: {
-				base: process.env.BASE_PATH ?? ''
-			}
+			paths: { base }
 		})
 	]
 });
