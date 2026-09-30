@@ -130,7 +130,11 @@ export interface PricingTier {
 	cadence: string;
 	features: string[];
 	cta: string;
-	href: string;
+	/**
+	 * Every tier's CTA opens the same Calendly event; this tags the booking so
+	 * Calendly reports which tier drove it, e.g. `pricing-retainer`.
+	 */
+	utmContent: string;
 	/** Renders the highlighted "most popular" treatment. */
 	featured?: boolean;
 	badge?: string;
@@ -213,8 +217,41 @@ export interface Guarantee {
 	tag: string;
 }
 
-export interface BookingSlot {
-	label: string;
+/** Scheduling-widget settings; see `$lib/data/calendly`. */
+export interface CalendlyConfig {
+	/** Full Calendly scheduling link, e.g. `https://calendly.com/acme/30min`. */
+	url: string;
+	/** Event name shown on our own chrome around the embed. */
+	eventLabel: string;
+	/** Duration and venue line, e.g. `30 Min · Google Meet`. */
+	eventDuration: string;
+	/** Hex colours *without* the leading `#`; a paid-plan Calendly feature. */
+	theme?: {
+		background: string;
+		text: string;
+		primary: string;
+	};
+	/** Drops Calendly's own event blurb, which repeats our section copy. */
+	hideEventTypeDetails?: boolean;
+	hideGdprBanner?: boolean;
+}
+
+/** Fields Calendly pre-populates on its booking form. */
+export interface CalendlyPrefill {
+	name?: string;
+	email?: string;
+	/** Keyed by the question's 1-based position, e.g. `{ a1: 'Rust migration' }`. */
+	customAnswers?: Record<string, string>;
+}
+
+/** Campaign parameters Calendly stores alongside the booking. */
+export interface CalendlyUtm {
+	utmSource?: string;
+	utmMedium?: string;
+	utmCampaign?: string;
+	/** Which CTA produced the booking, e.g. `header`, `pricing-retainer`. */
+	utmContent?: string;
+	utmTerm?: string;
 }
 
 export interface FooterLink {

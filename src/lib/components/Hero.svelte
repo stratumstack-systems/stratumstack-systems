@@ -1,4 +1,5 @@
 <script lang="ts">
+	import CalendlyButton from './CalendlyButton.svelte';
 	import CodeTerminal from './CodeTerminal.svelte';
 	import Counter from './Counter.svelte';
 	import Icon from './Icon.svelte';
@@ -60,17 +61,12 @@
 			</p>
 
 			<div class="flex flex-wrap items-center gap-4 pt-2">
-				<a
-					class="group font-mono from-primary-container border-secondary/40 inline-flex items-center justify-center gap-2 rounded border bg-gradient-to-r to-blue-700 px-6 py-3.5 text-sm font-semibold tracking-wide text-white shadow-[0_0_24px_-4px_rgba(37,99,235,0.5)] transition-all duration-200 hover:from-blue-600 hover:to-blue-800"
-					href="#book"
-				>
-					<span>Book a free 30-min technical call</span>
-					<Icon
-						name="bolt"
-						size={18}
-						class="text-secondary transition-transform group-hover:translate-x-0.5"
-					/>
-				</a>
+				<CalendlyButton
+					label="Book a free 30-min technical call"
+					variant="primary"
+					icon="bolt"
+					utmContent="hero"
+				/>
 				<a
 					class="glide-link group text-on-surface hover:text-secondary font-mono inline-flex items-center gap-2 px-4 py-3 text-sm font-medium tracking-wide transition-colors"
 					href="#case-studies"

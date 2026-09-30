@@ -1,4 +1,5 @@
 <script lang="ts">
+	import CalendlyButton from './CalendlyButton.svelte';
 	import Icon from './Icon.svelte';
 	import SectionHeading from './SectionHeading.svelte';
 	import { spotlight } from '$lib/actions/spotlight';
@@ -70,19 +71,13 @@
 						</ul>
 					</div>
 
-					<a
-						class="font-mono group mt-8 flex w-full items-center justify-center gap-1.5 rounded py-3 text-center text-xs font-semibold tracking-wide transition-all {tier.featured
-							? 'from-primary-container border-secondary/40 border bg-gradient-to-r to-blue-700 text-white shadow-lg hover:from-blue-600 hover:to-blue-800'
-							: 'bg-surface-high border-outline-subtle/40 hover:border-secondary/50 border text-white'}"
-						href={tier.href}
-					>
-						<span>{tier.cta}</span>
-						<Icon
-							name="arrow_forward"
-							size={15}
-							class="text-secondary transition-transform group-hover:translate-x-1"
-						/>
-					</a>
+					<CalendlyButton
+						label={tier.cta}
+						variant={tier.featured ? 'tile-featured' : 'tile'}
+						icon="arrow_forward"
+						iconSize={15}
+						utmContent={tier.utmContent}
+					/>
 				</article>
 			{/each}
 		</div>

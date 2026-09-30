@@ -15,7 +15,7 @@ export const pricingTiers: PricingTier[] = [
 			'60-minute executive & tech lead readout session'
 		],
 		cta: 'Get Assessment Scope',
-		href: '#book'
+		utmContent: 'pricing-assessment'
 	},
 	{
 		kicker: 'DEEP OPTIMIZATION',
@@ -32,7 +32,7 @@ export const pricingTiers: PricingTier[] = [
 			'Guaranteed p99 metric reduction threshold'
 		],
 		cta: 'Book Performance Sprint',
-		href: '#book',
+		utmContent: 'pricing-performance-sprint',
 		featured: true,
 		badge: 'Most Popular Sprint'
 	},
@@ -50,6 +50,6 @@ export const pricingTiers: PricingTier[] = [
 			'Weekly live pairing & architectural alignment'
 		],
 		cta: 'Inquire Retainer Slot',
-		href: '#book'
+		utmContent: 'pricing-retainer'
 	}
 ];

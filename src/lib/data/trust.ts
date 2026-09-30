@@ -1,4 +1,4 @@
-import type { BookingSlot, Guarantee } from '$lib/types';
+import type { Guarantee } from '$lib/types';
 
 export const guarantees: Guarantee[] = [
 	{
@@ -31,11 +31,4 @@ export const guarantees: Guarantee[] = [
 		body: 'Every deliverable strictly conforms to zero compiler warnings, 100% Clippy pedantic compliance, and verified Miri memory passes.',
 		tag: 'VERIFIED CODEBASE'
 	}
-];
-
-export const bookingSlots: BookingSlot[] = [
-	{ label: 'Tomorrow · 15:30 IST' },
-	{ label: 'Tomorrow · 18:00 IST' },
-	{ label: 'Thu · 16:00 IST' },
-	{ label: 'Thu · 19:30 IST' }
 ];

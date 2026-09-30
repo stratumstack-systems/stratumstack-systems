@@ -1,4 +1,5 @@
 <script lang="ts">
+	import CalendlyButton from './CalendlyButton.svelte';
 	import Icon from './Icon.svelte';
 	import Mark from './Mark.svelte';
 	import { nav, site } from '$lib/data/site';
@@ -28,17 +29,13 @@
 		</nav>
 
 		<div class="flex shrink-0 items-center gap-2">
-			<a
-				class="font-mono from-primary-container border-secondary/40 group inline-flex items-center gap-1.5 rounded border bg-gradient-to-r to-blue-700 px-3 py-1.5 text-[11px] font-medium tracking-wide whitespace-nowrap text-white shadow-[0_0_15px_-2px_rgba(37,99,235,0.4)] transition-all hover:from-blue-600 hover:to-blue-800 sm:px-4 sm:py-2 sm:text-xs"
-				href="#book"
-			>
-				<span>Book a Call</span>
-				<Icon
-					name="arrow_forward"
-					size={15}
-					class="text-secondary transition-transform group-hover:translate-x-0.5"
-				/>
-			</a>
+			<CalendlyButton
+				label="Book a Call"
+				variant="compact"
+				icon="arrow_forward"
+				iconSize={15}
+				utmContent="header"
+			/>
 			<button
 				type="button"
 				class="text-on-surface-variant hover:text-secondary flex h-8 w-8 items-center justify-center md:hidden"
